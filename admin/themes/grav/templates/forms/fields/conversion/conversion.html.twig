@@ -1,0 +1,23 @@
+{# author Greenrivers Team #}
+{# copyright Copyright (c) 2021 Greenrivers #}
+
+{% extends "forms/field.html.twig" %}
+
+{% block prepend %}{% endblock %}
+
+{% block input_attributes %}{% endblock %}
+
+{% block input %}
+    <div class="conversion-field convert">
+        <button class="button" type="button" id="convert">{{ field.label }}</button>
+        <span class="result"></span>
+    </div>
+
+    <div class="conversion-field progressbar">
+        <div class="progress">
+            <div id="progressbar">0%</div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block append %}{% endblock %}

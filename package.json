@@ -1,0 +1,58 @@
+{
+    "name": "greenrivers",
+    "version": "1.0.0",
+    "homepage": "http://greenrivers.pl",
+    "author": "Greenrivers",
+    "description": "Greenrivers webp plugin",
+    "main": "app/admin.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/greenrivers/grav-plugin-webp.git"
+    },
+    "license": "MIT",
+    "keywords": [
+        "css",
+        "js",
+        "framework",
+        "minify",
+        "front-end",
+        "sass",
+        "map",
+        "modern"
+    ],
+    "bugs": {
+        "url": "https://github.com/greenrivers/grav-plugin-webp/issues"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.12.10",
+        "gulp": "^4.0.2",
+        "gulp-autoprefixer": "latest",
+        "gulp-better-rollup": "^4.0.1",
+        "gulp-clean-css": "^3.9.4",
+        "gulp-concat": "^2.6.1",
+        "gulp-csscomb": "^3.1.0",
+        "gulp-rename": "^1.2.2",
+        "gulp-sass": "^4.1.0",
+        "gulp-terser": "^2.0.0",
+        "jquery": "^3.5.1",
+        "rollup": "^2.34.2",
+        "rollup-plugin-babel": "^4.4.0",
+        "rollup-plugin-commonjs": "^10.1.0",
+        "rollup-plugin-node-resolve": "^5.2.0"
+    },
+    "browserslist": [
+        "last 4 Chrome versions",
+        "Edge >= 12",
+        "Firefox ESR",
+        "last 4 Safari versions",
+        "last 4 Opera versions",
+        "Explorer >= 10"
+    ],
+    "scripts": {
+        "dev": "gulp watch",
+        "build": "gulp build"
+    },
+    "dependencies": {
+        "gulp-sourcemaps": "^2.6.4"
+    }
+}

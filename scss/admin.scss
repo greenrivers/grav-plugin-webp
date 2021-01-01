@@ -1,0 +1,30 @@
+/**
+ * @author Greenrivers Team
+ * @copyright Copyright (c) 2021 Greenrivers
+ */
+
+.conversion-field {
+    &.convert {
+        .info-result {
+            margin: 0 0 0 10px;
+        }
+    }
+
+    &.progressbar {
+        margin: 1rem 0 0;
+
+        .progress {
+            width: 100%;
+            background-color: #ddd;
+
+            #progressbar {
+                width: 0;
+                height: 30px;
+                background-color: #4CAF50;
+                text-align: center;
+                line-height: 30px;
+                color: white;
+            }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+name: Webp
+slug: webp
+type: plugin
+version: 1.0.0
+description: Webp image conversion
+icon: image
+author:
+  name: Greenrivers
+  email: support@greenrivers.pl
+  url: http://greenrivers.pl
+homepage: https://github.com/greenrivers/grav-plugin-webp
+keywords: webp, conversion, image, optimization, plugin, admin
+bugs: https://github.com/greenrivers/grav-plugin-webp/issues
+docs: https://github.com/greenrivers/grav-plugin-webp/blob/develop/README.md
+license: MIT
+
+dependencies:
+  - { name: grav, version: '>=1.6.0' }
+
+form:
+  validation: loose
+  fields:
+    enabled:
+      type: toggle
+      outerclasses: conditional condition
+      label: PLUGIN_ADMIN.PLUGIN_STATUS
+      highlight: 1
+      default: 0
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+    conversion:
+      type: conversion
+      outerclasses: conditional option option-1
+      label: Convert
