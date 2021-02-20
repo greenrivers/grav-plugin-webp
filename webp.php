@@ -65,7 +65,7 @@ class WebpPlugin extends Plugin
 
         $paths = $uri->paths();
 
-        if ($paths[2] === 'webp' && $paths[3]) {
+        if ($paths[2] === 'webp' && isset($paths[3])) {
             switch ($paths[3]) {
                 case 'convert':
                     $totalImages = $session->getFlashObject('total_images');
