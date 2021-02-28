@@ -1,13 +1,13 @@
 name: Webp
 slug: webp
 type: plugin
-version: 1.0.0
+version: 1.0.1
 description: Webp image conversion
 icon: image
 author:
   name: Greenrivers
-  email: support@greenrivers.pl
-  url: http://greenrivers.pl
+  email: kontakt@greenrivers.pl
+  url: https://greenrivers.pl
 homepage: https://github.com/greenrivers/grav-plugin-webp
 keywords: webp, conversion, image, optimization, plugin, admin
 bugs: https://github.com/greenrivers/grav-plugin-webp/issues
