@@ -1,11 +1,17 @@
+# v1.0.3
+##  02/28/2021
+
+1. [](#new)
+    * Fix changelog date format
+
 # v1.0.2
-##  28/02/2021
+##  02/28/2021
 
 1. [](#new)
     * Fix blueprints release
 
 # v1.0.1
-##  20/02/2021
+##  02/20/2021
 
 1. [](#new)
     * Fix plugin crashes after activation
