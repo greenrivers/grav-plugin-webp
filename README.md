@@ -85,6 +85,13 @@ Source from variable.
 <img alt="webp image" src="{{ url(logo)|webp }}">
 ```
 
+### Issues:
+
+Sometimes after plugin activation You can see text field instead of button & progressbar.<br/>
+To resolve it, save config again with **Enabled** status.
+
+![Plugin enabled bug](assets/images/plugin-enabled-bug.webp)
+
 ## Credits
 
 https://www.php.net/manual/en/image.installation.php
