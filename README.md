@@ -57,9 +57,17 @@ Note that if you use the Admin Plugin, a file with your configuration named webp
 
 ## Usage
 
-Click on **Convert** button from plugin settings in admin menu.
+1. Conversion
+   - Click on **Convert** button from plugin settings in admin menu.
+   - Info about number of the converted images should appear next to the **Convert** button.
 
-Info about number of the converted images should appear next to the **Convert** button.
+![Convert](assets/images/convert.webp)
+
+2. Clear all
+    - Click on **Clear all** button from plugin settings in admin menu.
+    - Info about number of the removed webp images should appear next to the **Clear all* button.
+
+![Clear all](assets/images/clear_all.webp)
 
 Plugin supports following extensions:
 
@@ -100,6 +108,7 @@ https://developers.google.com/speed/webp
 
 ## To Do
 
-- [ ] Create **Clear all** option
+- [x] Create **Clear all** option
+- [ ] Create image quality option
 - [ ] Add console commands
 - [ ] Add unit tests
