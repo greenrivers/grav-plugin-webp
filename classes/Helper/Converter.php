@@ -1,8 +1,8 @@
 <?php
 /**
- * @author Greenrivers Team
+ * @author Greenrivers
  * @copyright Copyright (c) 2021 Greenrivers
- * @package Grav\Plugin
+ * @package Grav\Plugin\Webp
  */
 
 namespace Grav\Plugin\Webp\Helper;
@@ -11,8 +11,8 @@ use Grav\Common\Filesystem\Folder;
 
 class Converter
 {
-    const PNG_EXTENSION = 'png';
-    const QUALITY = 100;
+    private const PNG_EXTENSION = 'png';
+    private const QUALITY = 100;
 
     /** @var Image */
     private $image;

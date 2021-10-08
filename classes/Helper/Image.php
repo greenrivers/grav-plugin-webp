@@ -1,16 +1,16 @@
 <?php
 /**
- * @author Greenrivers Team
+ * @author Greenrivers
  * @copyright Copyright (c) 2021 Greenrivers
- * @package Grav\Plugin
+ * @package Grav\Plugin\Webp
  */
 
 namespace Grav\Plugin\Webp\Helper;
 
 class Image
 {
-    const WEBP_EXTENSION = 'webp';
-    const WEBP_DIR_PREFIX = 'user/webp';
+    private const WEBP_EXTENSION = 'webp';
+    private const WEBP_DIR_PREFIX = 'user/webp';
 
     /**
      * @param string $pathname

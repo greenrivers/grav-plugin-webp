@@ -1,5 +1,5 @@
 /**
- * @author Greenrivers Team
+ * @author Greenrivers
  * @copyright Copyright (c) 2021 Greenrivers
  */
 

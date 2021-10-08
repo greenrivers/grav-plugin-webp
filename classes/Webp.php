@@ -1,8 +1,8 @@
 <?php
 /**
- * @author Greenrivers Team
+ * @author Greenrivers
  * @copyright Copyright (c) 2021 Greenrivers
- * @package Grav\Plugin
+ * @package Grav\Plugin\Webp
  */
 
 namespace Grav\Plugin\Webp;
