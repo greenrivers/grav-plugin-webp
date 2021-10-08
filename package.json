@@ -1,7 +1,7 @@
 {
     "name": "greenrivers",
     "version": "1.0.4",
-    "homepage": "http://greenrivers.pl/en/",
+    "homepage": "https://greenrivers.pl/en/",
     "author": "Greenrivers",
     "description": "Greenrivers webp plugin",
     "main": "app/admin.js",

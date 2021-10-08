@@ -15,7 +15,8 @@
   ],
   "require": {
     "php": ">=7.1.3",
-    "symfony/finder": "^4.4"
+    "symfony/finder": "^4.4",
+    "symfony/filesystem": "^4.4"
   },
   "autoload": {
     "psr-4": {

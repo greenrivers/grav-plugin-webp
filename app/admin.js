@@ -4,7 +4,9 @@
  */
 
 import progressbar from './modules/progressbar';
+import spinnerLoader from './modules/spinner-loader';
 
-document.addEventListener("DOMContentLoaded", event => {
+document.addEventListener("DOMContentLoaded", () => {
     progressbar();
+    spinnerLoader();
 });

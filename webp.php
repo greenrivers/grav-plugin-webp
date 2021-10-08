@@ -55,7 +55,7 @@ class WebpPlugin extends Plugin
         $this->webp = new Webp();
     }
 
-    public function onPagesInitialized()
+    public function onPagesInitialized(): void
     {
         /** @var SessionInterface $session */
         $session = $this->grav['session'];
@@ -76,6 +76,23 @@ class WebpPlugin extends Plugin
                     $session->setFlashObject('converted_images_count', $convertedImagesCount);
 
                     Response::sendJsonResponse(['converted_images' => $convertedImagesCount]);
+                    break;
+                case 'clear_all':
+                    $webpImages = $session->getFlashObject('webp_images');
+                    $removedImagesCount = $this->webp->clearAll(
+                        $webpImages, $session->getFlashObject('removed_images_count')
+                    );
+                    $session->setFlashObject('webp_images', $webpImages);
+                    $session->setFlashObject('removed_images_count', $removedImagesCount);
+
+                    Response::sendJsonResponse(['removed_images' => $removedImagesCount]);
+                    break;
+                case 'webp_images':
+                    $webpImages = $this->webp->getImagesToRemove();
+                    $session->setFlashObject('webp_images', $webpImages);
+                    $session->setFlashObject('removed_images_count', 0);
+
+                    Response::sendJsonResponse(['webp_images' => count($webpImages)]);
                     break;
                 case 'images':
                     $totalImages = $this->webp->getImagesToConversion();

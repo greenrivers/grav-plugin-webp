@@ -7,7 +7,8 @@ import $ from 'jquery';
 
 export default function progressbar() {
     const convert = $('#convert');
-    const result = $('.result');
+    const result = $('.conversion-field .result');
+    const progressbar = $('.conversion-field #progressbar');
     let total_images = 0;
 
     const convertImages = () => {
@@ -17,8 +18,9 @@ export default function progressbar() {
             type: 'POST'
         }).done(data => {
             const {converted_images} = data;
-            const progressbar = $('#progressbar');
-            let width = Math.round(parseInt(progressbar.css('width')) / parseInt(progressbar.parent().css('width')) * 100) + Math.round(100 / total_images);
+            let width = Math.round(
+                parseInt(progressbar.css('width')) / parseInt(progressbar.parent().css('width')) * 100
+            ) + Math.round(100 / total_images);
 
             if (converted_images === total_images) {
                 width = 100;
@@ -27,7 +29,7 @@ export default function progressbar() {
             progressbar.css('width', `${width}%`);
             progressbar.html(`${width}%`);
             convert.prop('disabled', true);
-            result.html(`Converted ${converted_images}/${total_images} images`);
+            result.html(`Converted ${converted_images}/${total_images} images.`);
 
             if (converted_images < total_images) {
                 convertImages();
@@ -45,9 +47,12 @@ export default function progressbar() {
             total_images = data.total_images;
 
             if (total_images > 0) {
+                progressbar.css('width', `0%`);
+                progressbar.html(`0%`);
+
                 convertImages();
             } else {
-                result.html('No images to conversion');
+                result.html('No images to conversion.');
             }
         }).fail(data => {
             console.error(data);

@@ -1,0 +1,23 @@
+{# author Greenrivers Team #}
+{# copyright Copyright (c) 2021 Greenrivers #}
+
+{% extends "forms/field.html.twig" %}
+
+{% block prepend %}{% endblock %}
+
+{% block input_attributes %}{% endblock %}
+
+{% block input %}
+    <div class="clear-all-field clear-all">
+        <button class="button" type="button" id="clear_all">{{ field.label }}</button>
+        <span class="result"></span>
+    </div>
+
+    <div class="clear-all-field spinner">
+        <div class="spinner">
+            <div class="loading-text" id="loading_text">0%</div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block append %}{% endblock %}

@@ -3,6 +3,16 @@
  * @copyright Copyright (c) 2021 Greenrivers
  */
 
+$bg-color: #ccc;
+$progress-color: #4caf50;
+
+:root {
+    --progress-color-25: #{$bg-color};
+    --progress-color-50: #{$bg-color};
+    --progress-color-75: #{$bg-color};
+    --progress-color-100: #{$bg-color};
+}
+
 .conversion-field {
     &.convert {
         .info-result {
@@ -15,16 +25,40 @@
 
         .progress {
             width: 100%;
-            background-color: #ddd;
+            background-color: $bg-color;
 
             #progressbar {
                 width: 0;
                 height: 30px;
-                background-color: #4CAF50;
+                background-color: $progress-color;
                 text-align: center;
                 line-height: 30px;
                 color: white;
             }
+        }
+    }
+}
+
+.clear-all-field {
+    .spinner {
+        padding: 15px 0 75px 0;
+
+        &:before {
+            content: "";
+            height: 90px;
+            width: 90px;
+            position: absolute;
+            border-width: 8px;
+            border-style: solid;
+            border-color: var(--progress-color-25) var(--progress-color-50) var(--progress-color-75) var(--progress-color-100);
+            border-radius: 100%;
+        }
+
+        .loading-text {
+            width: 95px;
+            position: absolute;
+            text-align: center;
+            padding: 33px 0 77px 0;
         }
     }
 }

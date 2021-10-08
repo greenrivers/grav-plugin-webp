@@ -8,6 +8,7 @@
 namespace Grav\Plugin\Webp;
 
 use Grav\Common\Filesystem\Folder;
+use Grav\Plugin\Webp\Helper\Clear;
 use Grav\Plugin\Webp\Helper\Converter;
 use Grav\Plugin\Webp\Helper\Image;
 use Grav\Plugin\Webp\Helper\View;
@@ -24,6 +25,9 @@ class Webp
     /** @var Converter */
     private $converter;
 
+    /** @var Clear */
+    private $clear;
+
     /** @var View */
     private $view;
 
@@ -35,6 +39,7 @@ class Webp
         $this->finder = new Finder();
         $this->image = new Image();
         $this->converter = new Converter();
+        $this->clear = new Clear();
         $this->view = new View();
     }
 
@@ -82,6 +87,36 @@ class Webp
     }
 
     /**
+     * @return array
+     */
+    public function getImagesToRemove(): array
+    {
+        $imagesToRemove = [];
+        $folder = ['user/webp'];
+        $extensions = ['*.webp'];
+
+        $images = $this->finder
+            ->ignoreDotFiles(false)
+            ->files()
+            ->in($folder)
+            ->exclude('node_modules')
+            ->name($extensions);
+
+        foreach ($images as $image) {
+            $imagesToRemove[] = [
+                'extension' => $image->getExtension(),
+                'pathname' => $image->getPathname(),
+                'pathinfo' => [
+                    'pathname' => $image->getPathInfo()->getPathname()
+                ],
+                'filenamewithoutextension' => $image->getFilenameWithoutExtension()
+            ];
+        }
+
+        return $imagesToRemove;
+    }
+
+    /**
      * @param array $totalImages
      * @param int $convertedImagesCount
      * @return int
@@ -97,6 +132,24 @@ class Webp
         }
 
         return $convertedImagesCount;
+    }
+
+    /**
+     * @param array $webpImages
+     * @param int $removedImagesCount
+     * @return int
+     */
+    public function clearAll(array $webpImages, int $removedImagesCount): int
+    {
+        $index = $removedImagesCount;
+
+        foreach ($webpImages as $key => $image) {
+            if ($key === $index && $this->clear->removeImage($image)) {
+                $removedImagesCount++;
+            }
+        }
+
+        return $removedImagesCount;
     }
 
     /**
