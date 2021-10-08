@@ -34,8 +34,8 @@ form:
     conversion:
       type: conversion
       outerclasses: conditional option option-1
-      label: Convert
+      label: PLUGIN_WEBP.CONVERSION_FIELD_LABEL
     clear_all:
       type: clear_all
       outerclasses: conditional option option-1
-      label: Clear all
+      label: PLUGIN_WEBP.CLEAR_ALL_FIELD_LABEL

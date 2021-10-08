@@ -9,7 +9,7 @@
 
 {% block input %}
     <div class="clear-all-field clear-all">
-        <button class="button" type="button" id="clear_all">{{ field.label }}</button>
+        <button class="button" type="button" id="clear_all">{{ field.label|t|e }}</button>
         <span class="result"></span>
     </div>
 

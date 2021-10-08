@@ -1,4 +1,8 @@
 en:
   PLUGIN_WEBP:
-    TEXT_VARIABLE: Text Variable
-    TEXT_VARIABLE_HELP: Text to add to the top of a page
+    CONVERSION_FIELD_LABEL: 'Convert'
+    CLEAR_ALL_FIELD_LABEL: 'Clear all'
+pl:
+  PLUGIN_WEBP:
+    CONVERSION_FIELD_LABEL: 'Konwertuj'
+    CLEAR_ALL_FIELD_LABEL: 'Usuń wszystkie'

@@ -9,7 +9,7 @@
 
 {% block input %}
     <div class="conversion-field convert">
-        <button class="button" type="button" id="convert">{{ field.label }}</button>
+        <button class="button" type="button" id="convert">{{ field.label|t|e }}</button>
         <span class="result"></span>
     </div>
 
