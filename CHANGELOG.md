@@ -1,3 +1,14 @@
+# v1.2.0
+##  03/19/2022
+
+1. [](#new)
+    * Added image quality slider
+2. [](#bugfix)
+    * Fixed progress for Chrome browser
+3. [](#improved)
+    * Updated DocBlocks
+    * Updated README
+
 # v1.1.0
 ##  10/08/2021
 
