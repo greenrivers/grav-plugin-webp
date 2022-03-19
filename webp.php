@@ -133,11 +133,14 @@ class WebpPlugin extends Plugin
     {
         /** @var Data $object */
         $object = $event['object'];
+        $blueprints = $object->blueprints();
 
         /** @var SessionInterface $session */
         $session = $this->grav['session'];
 
-        $object->set('quality', $session->__get('quality'));
+        if ($object instanceof Data && $blueprints->getFilename() === 'webp/blueprints') {
+            $object->set('quality', $session->__get('quality'));
+        }
     }
 
     /**
