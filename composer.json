@@ -1,32 +1,44 @@
 {
-  "name": "greenrivers/webp",
-  "type": "grav-plugin",
-  "description": "Webp image conversion",
-  "keywords": ["plugin", "grav", "webp", "image", "conversion", "optimize"],
-  "homepage": "https://github.com/greenrivers/grav-plugin-webp",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Greenrivers",
-      "homepage": "https://greenrivers.pl",
-      "email": "kontakt@greenrivers.pl",
-      "role": "Developer"
-    }
-  ],
-  "require": {
-    "php": ">=7.1.3",
-    "symfony/finder": "^4.4",
-    "symfony/filesystem": "^4.4"
-  },
-  "autoload": {
-    "psr-4": {
-      "Grav\\Plugin\\Webp\\": "classes/"
+    "name": "greenrivers/webp",
+    "type": "grav-plugin",
+    "description": "Webp image conversion",
+    "keywords": [
+        "plugin",
+        "grav",
+        "webp",
+        "image",
+        "conversion",
+        "optimize"
+    ],
+    "homepage": "https://github.com/greenrivers/grav-plugin-webp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Greenrivers",
+            "homepage": "https://greenrivers.pl",
+            "email": "kontakt@greenrivers.pl",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.3",
+        "symfony/finder": "^4.4",
+        "symfony/filesystem": "^4.4"
     },
-    "classmap":  ["webp.php"]
-  },
-  "config": {
-    "platform": {
-      "php": "7.1.3"
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    },
+    "autoload": {
+        "psr-4": {
+            "Grav\\Plugin\\Webp\\": "classes/"
+        },
+        "classmap": [
+            "webp.php"
+        ]
+    },
+    "config": {
+        "platform": {
+            "php": "7.1.3"
+        }
     }
-  }
 }

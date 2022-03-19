@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Greenrivers
- * @copyright Copyright (c) 2021 Greenrivers
+ * @copyright Copyright (c) 2022 Greenrivers
  * @package Grav\Plugin\Webp
  */
 
@@ -45,6 +45,9 @@ class WebpPlugin extends Plugin
         return require __DIR__ . '/vendor/autoload.php';
     }
 
+    /**
+     * @return void
+     */
     public function onPluginsInitialized(): void
     {
         $this->enable([
@@ -57,6 +60,9 @@ class WebpPlugin extends Plugin
         $this->webp = new Webp();
     }
 
+    /**
+     * @return void
+     */
     public function onPagesInitialized(): void
     {
         /** @var SessionInterface $session */
@@ -67,7 +73,7 @@ class WebpPlugin extends Plugin
 
         $paths = $uri->paths();
 
-        if (isset($paths[2]) && $paths[2] === 'webp' && isset($paths[3])) {
+        if (isset($paths[2], $paths[3]) && $paths[2] === 'webp') {
             switch ($paths[3]) {
                 case 'quality':
                     $quality = $uri->post('quality');
@@ -134,6 +140,9 @@ class WebpPlugin extends Plugin
         $object->set('quality', $session->__get('quality'));
     }
 
+    /**
+     * @return void
+     */
     public function onAssetsInitialized(): void
     {
         if ($this->isAdmin()) {

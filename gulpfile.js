@@ -1,6 +1,6 @@
 /**
  * @author Greenrivers
- * @copyright Copyright (c) 2021 Greenrivers
+ * @copyright Copyright (c) 2022 Greenrivers
  */
 
 const gulp = require('gulp');

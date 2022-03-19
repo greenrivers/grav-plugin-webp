@@ -1,4 +1,4 @@
-/** @author Greenrivers @copyright Copyright (c) 2021 Greenrivers */
+/** @author Greenrivers @copyright Copyright (c) 2022 Greenrivers */
 :root { --progress-color-25: #ccc; --progress-color-50: #ccc; --progress-color-75: #ccc; --progress-color-100: #ccc; }
 
 .quality-field.quality .slider-range label { display: none; }

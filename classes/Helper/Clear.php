@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Greenrivers
- * @copyright Copyright (c) 2021 Greenrivers
+ * @copyright Copyright (c) 2022 Greenrivers
  * @package Grav\Plugin\Webp
  */
 

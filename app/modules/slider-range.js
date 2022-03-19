@@ -1,6 +1,6 @@
 /**
  * @author Greenrivers
- * @copyright Copyright (c) 2021 Greenrivers
+ * @copyright Copyright (c) 2022 Greenrivers
  */
 
 import $ from 'jquery';
