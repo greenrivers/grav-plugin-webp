@@ -51,21 +51,28 @@ Here is the default configuration and an explanation of available options:
 
 ```yaml
 enabled: true
+quality: 100
 ```
 
 Note that if you use the Admin Plugin, a file with your configuration named webp.yaml will be saved in the `user/config/plugins/`-folder once the configuration is saved in the Admin.
 
 ## Usage
 
-1. Conversion
+1. Quality
+    - Set up value on slider range
+    - Quality percent value is displayed below the slider
+
+![Quality](assets/images/quality.webp)
+
+2. Conversion
    - Click on **Convert** button from plugin settings in admin menu.
-   - Info about number of the converted images should appear next to the **Convert** button.
+   - Info about number of the converted images appears next to the **Convert** button.
 
 ![Convert](assets/images/convert.webp)
 
-2. Clear all
+3. Clear all
     - Click on **Clear all** button from plugin settings in admin menu.
-    - Info about number of the removed webp images should appear next to the **Clear all** button.
+    - Info about number of the removed webp images appears next to the **Clear all** button.
 
 ![Clear all](assets/images/clear_all.webp)
 
@@ -75,7 +82,9 @@ Plugin supports following extensions:
 - jpeg
 - png
 
-<ins>After conversion You should clear cache.</ins>
+Better quality causes bigger image size.
+
+<ins>After conversion You must clear cache.</ins>
 
 To display converted image use **webp** filter in twig templates.
 
@@ -109,6 +118,6 @@ https://developers.google.com/speed/webp
 ## To Do
 
 - [x] Create **Clear all** option
-- [ ] Create image quality option
+- [x] Create image quality option
 - [ ] Add console commands
 - [ ] Add unit tests
