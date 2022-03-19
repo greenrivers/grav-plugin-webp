@@ -65,7 +65,7 @@ Note that if you use the Admin Plugin, a file with your configuration named webp
 
 2. Clear all
     - Click on **Clear all** button from plugin settings in admin menu.
-    - Info about number of the removed webp images should appear next to the **Clear all* button.
+    - Info about number of the removed webp images should appear next to the **Clear all** button.
 
 ![Clear all](assets/images/clear_all.webp)
 

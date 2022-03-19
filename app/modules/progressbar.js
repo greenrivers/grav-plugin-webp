@@ -6,10 +6,27 @@
 import $ from 'jquery';
 
 export default function progressbar() {
+    const quality = $('#quality');
+
     const convert = $('#convert');
     const result = $('.conversion-field .result');
     const progressbar = $('.conversion-field #progressbar');
     let total_images = 0;
+
+    const setQuality = () => {
+        $.ajax({
+            url: '/admin/plugins/webp/quality',
+            async: false,
+            type: 'POST',
+            data: {quality: quality.val()}
+        }).done(data => {
+            if (data.status) {
+                convertImages();
+            }
+        }).fail(data => {
+            console.error(data);
+        });
+    }
 
     const convertImages = () => {
         $.ajax({
@@ -50,7 +67,7 @@ export default function progressbar() {
                 progressbar.css('width', `0%`);
                 progressbar.html(`0%`);
 
-                convertImages();
+                setQuality();
             } else {
                 result.html('No images to conversion.');
             }

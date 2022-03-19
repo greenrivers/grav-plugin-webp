@@ -12,7 +12,6 @@ use Grav\Common\Filesystem\Folder;
 class Converter
 {
     private const PNG_EXTENSION = 'png';
-    private const QUALITY = 100;
 
     /** @var Image */
     private $image;
@@ -27,9 +26,10 @@ class Converter
 
     /**
      * @param array $image
+     * @param int $quality
      * @return bool
      */
-    public function convert(array $image): bool
+    public function convert(array $image, int $quality): bool
     {
         $extension = $image['extension'];
         $imagePath = $image['pathname'];
@@ -55,7 +55,7 @@ class Converter
                 Folder::create($webpDir);
             }
 
-            $result = @imagewebp($image, $webpPath, self::QUALITY);
+            $result = @imagewebp($image, $webpPath, $quality);
             ob_get_clean();
         } else {
             $result = false;

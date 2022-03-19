@@ -8,6 +8,7 @@
 namespace Grav\Plugin;
 
 use Composer\Autoload\ClassLoader;
+use Grav\Common\Data\Data;
 use Grav\Common\Grav;
 use Grav\Common\Plugin;
 use Grav\Common\Twig\Twig;
@@ -48,6 +49,7 @@ class WebpPlugin extends Plugin
     {
         $this->enable([
             'onAssetsInitialized' => ['onAssetsInitialized', 0],
+            'onAdminSave' => ['onAdminSave', 0],
             'onAdminTwigTemplatePaths' => ['onAdminTwigTemplatePaths', 0],
             'onTwigInitialized' => ['onTwigInitialized', 0]
         ]);
@@ -67,10 +69,18 @@ class WebpPlugin extends Plugin
 
         if (isset($paths[2]) && $paths[2] === 'webp' && isset($paths[3])) {
             switch ($paths[3]) {
+                case 'quality':
+                    $quality = $uri->post('quality');
+                    $session->__set('quality', $quality);
+
+                    Response::sendJsonResponse(['status' => $session->__get('quality')]);
+                    break;
                 case 'convert':
                     $totalImages = $session->getFlashObject('total_images');
                     $convertedImagesCount = $this->webp->process(
-                        $totalImages, $session->getFlashObject('converted_images_count')
+                        $totalImages,
+                        $session->getFlashObject('converted_images_count'),
+                        $session->__get('quality')
                     );
                     $session->setFlashObject('total_images', $totalImages);
                     $session->setFlashObject('converted_images_count', $convertedImagesCount);
@@ -80,7 +90,8 @@ class WebpPlugin extends Plugin
                 case 'clear_all':
                     $webpImages = $session->getFlashObject('webp_images');
                     $removedImagesCount = $this->webp->clearAll(
-                        $webpImages, $session->getFlashObject('removed_images_count')
+                        $webpImages,
+                        $session->getFlashObject('removed_images_count')
                     );
                     $session->setFlashObject('webp_images', $webpImages);
                     $session->setFlashObject('removed_images_count', $removedImagesCount);
@@ -106,6 +117,21 @@ class WebpPlugin extends Plugin
                     break;
             }
         }
+    }
+
+    /**
+     * @param Event $event
+     * @return void
+     */
+    public function onAdminSave(Event $event): void
+    {
+        /** @var Data $object */
+        $object = $event['object'];
+
+        /** @var SessionInterface $session */
+        $session = $this->grav['session'];
+
+        $object->set('quality', $session->__get('quality'));
     }
 
     public function onAssetsInitialized(): void

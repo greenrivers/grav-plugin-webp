@@ -119,14 +119,15 @@ class Webp
     /**
      * @param array $totalImages
      * @param int $convertedImagesCount
+     * @param int $quality
      * @return int
      */
-    public function process(array $totalImages, int $convertedImagesCount): int
+    public function process(array $totalImages, int $convertedImagesCount, int $quality): int
     {
         $index = $convertedImagesCount;
 
         foreach ($totalImages as $key => $image) {
-            if ($key === $index && $this->converter->convert($image)) {
+            if ($key === $index && $this->converter->convert($image, $quality)) {
                 $convertedImagesCount++;
             }
         }

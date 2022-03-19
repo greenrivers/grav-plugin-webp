@@ -1,0 +1,24 @@
+{# author Greenrivers #}
+{# copyright Copyright (c) 2021 Greenrivers #}
+
+{% extends "forms/field.html.twig" %}
+
+{% block prepend %}{% endblock %}
+
+{% block input_attributes %}{% endblock %}
+
+{% block input %}
+    <div class="quality-field quality">
+        <div class="slider-range">
+            <label for="quality"></label>
+            <input type="range" min="1" max="100" value="{{ config.plugins.webp.quality }}" class="slider" id="quality">
+        </div>
+
+        <div class="result">
+            <span class="text">{{ field.label|t|e }}: </span>
+            <span class="value">{{ config.plugins.webp.quality }}</span><span class="percent">%</span>
+        </div>
+    </div>
+{% endblock %}
+
+{% block append %}{% endblock %}

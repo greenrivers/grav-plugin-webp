@@ -1,8 +1,10 @@
 en:
   PLUGIN_WEBP:
+    QUALITY_FIELD_LABEL: 'Quality'
     CONVERSION_FIELD_LABEL: 'Convert'
     CLEAR_ALL_FIELD_LABEL: 'Clear all'
 pl:
   PLUGIN_WEBP:
+    QUALITY_FIELD_LABEL: 'Jakość'
     CONVERSION_FIELD_LABEL: 'Konwertuj'
     CLEAR_ALL_FIELD_LABEL: 'Usuń wszystkie'

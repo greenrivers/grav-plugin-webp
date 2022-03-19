@@ -31,6 +31,10 @@ form:
         0: PLUGIN_ADMIN.DISABLED
       validate:
         type: bool
+    quality:
+      type: quality
+      outerclasses: conditional option option-1
+      label: PLUGIN_WEBP.QUALITY_FIELD_LABEL
     conversion:
       type: conversion
       outerclasses: conditional option option-1
