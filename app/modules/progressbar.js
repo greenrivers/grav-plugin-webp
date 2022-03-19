@@ -31,9 +31,8 @@ export default function progressbar() {
     const convertImages = () => {
         $.ajax({
             url: '/admin/plugins/webp/convert',
-            async: false,
             type: 'POST'
-        }).done(data => {
+        }).then((data) => {
             const {converted_images} = data;
             let width = Math.round(
                 parseInt(progressbar.css('width')) / parseInt(progressbar.parent().css('width')) * 100

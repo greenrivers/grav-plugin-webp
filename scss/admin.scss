@@ -29,7 +29,6 @@ $progress-color: #4caf50;
             }
 
             .slider {
-                width: 100%;
                 height: 15px;
                 background: #d3d3d3;
                 -webkit-appearance: none;
@@ -79,7 +78,7 @@ $progress-color: #4caf50;
         margin: 1rem 0 0;
 
         .progress {
-            width: 100%;
+            width: 50%;
             background-color: $bg-color;
 
             #progressbar {

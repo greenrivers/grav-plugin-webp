@@ -19,9 +19,8 @@ export default function spinnerLoader() {
     const clearAllImages = () => {
         $.ajax({
             url: '/admin/plugins/webp/clear_all',
-            async: false,
             type: 'POST'
-        }).done((data) => {
+        }).then((data) => {
             const {removed_images} = data;
             const value = Math.round((removed_images / webp_images) * 100);
 
