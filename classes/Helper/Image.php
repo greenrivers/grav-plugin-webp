@@ -7,10 +7,29 @@
 
 namespace Grav\Plugin\Webp\Helper;
 
+use Symfony\Component\Finder\SplFileInfo;
+
 class Image
 {
     private const WEBP_EXTENSION = 'webp';
     private const WEBP_DIR_PREFIX = 'user/webp';
+
+    /**
+     * @param SplFileInfo $image
+     * @param bool $cli
+     * @return array
+     */
+    public function getImageData(SplFileInfo $image, bool $cli = false): array
+    {
+        return [
+            'extension' => $image->getExtension(),
+            'pathname' => $cli ? $image->getRelativePathname() : $image->getPathname(),
+            'pathinfo' => [
+                'pathname' => $cli ? $image->getRelativePath() : $image->getPathInfo()->getPathname()
+            ],
+            'filenamewithoutextension' => $image->getFilenameWithoutExtension()
+        ];
+    }
 
     /**
      * @param string $pathname

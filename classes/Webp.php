@@ -10,6 +10,7 @@ namespace Grav\Plugin\Webp;
 use Grav\Common\Filesystem\Folder;
 use Grav\Plugin\Webp\Helper\Clear;
 use Grav\Plugin\Webp\Helper\Converter;
+use Grav\Plugin\Webp\Helper\File;
 use Grav\Plugin\Webp\Helper\Image;
 use Grav\Plugin\Webp\Helper\View;
 use Symfony\Component\Finder\Finder;
@@ -18,6 +19,9 @@ class Webp
 {
     /** @var Finder */
     private $finder;
+
+    /** @var File */
+    private $file;
 
     /** @var Image */
     private $image;
@@ -37,6 +41,7 @@ class Webp
     public function __construct()
     {
         $this->finder = new Finder();
+        $this->file = new File();
         $this->image = new Image();
         $this->converter = new Converter();
         $this->clear = new Clear();
@@ -53,7 +58,7 @@ class Webp
         $extensions = ['*.jpg', '*.jpeg', '*.png'];
 
         foreach ($folders as $folder) {
-            if (!file_exists($folder)) {
+            if (!$this->file->fileExists($folder)) {
                 Folder::create($folder);
             }
         }
@@ -71,15 +76,8 @@ class Webp
                 $image->getFilenameWithoutExtension()
             );
 
-            if (!file_exists($webpPath)) {
-                $imagesToConversion[] = [
-                    'extension' => $image->getExtension(),
-                    'pathname' => $image->getPathname(),
-                    'pathinfo' => [
-                        'pathname' => $image->getPathInfo()->getPathname()
-                    ],
-                    'filenamewithoutextension' => $image->getFilenameWithoutExtension()
-                ];
+            if (!$this->file->fileExists($webpPath)) {
+                $imagesToConversion[] = $this->image->getImageData($image);
             }
         }
 
@@ -103,14 +101,7 @@ class Webp
             ->name($extensions);
 
         foreach ($images as $image) {
-            $imagesToRemove[] = [
-                'extension' => $image->getExtension(),
-                'pathname' => $image->getPathname(),
-                'pathinfo' => [
-                    'pathname' => $image->getPathInfo()->getPathname()
-                ],
-                'filenamewithoutextension' => $image->getFilenameWithoutExtension()
-            ];
+            $imagesToRemove[] = $this->image->getImageData($image);
         }
 
         return $imagesToRemove;

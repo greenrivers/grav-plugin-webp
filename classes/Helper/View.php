@@ -45,8 +45,6 @@ class View
      */
     public function getImageExtension(string $imagePath): string
     {
-        $image = new SplFileInfo($imagePath);
-
-        return $image->getExtension();
+        return (new SplFileInfo($imagePath))->getExtension();
     }
 }
