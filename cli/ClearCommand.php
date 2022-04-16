@@ -22,14 +22,14 @@ class ClearCommand extends ConsoleCommand
 
     private const ALL_OPTION_NAME = 'all';
 
-    /** @var Clear */
-    private $clear;
-
     /** @var File */
     private $file;
 
     /** @var Image */
     private $image;
+
+    /** @var Clear */
+    private $clear;
 
     /** @var Webp */
     private $webp;
@@ -40,9 +40,9 @@ class ClearCommand extends ConsoleCommand
      */
     public function __construct($name = null)
     {
-        $this->clear = new Clear();
         $this->file = new File();
         $this->image = new Image();
+        $this->clear = new Clear();
         $this->webp = new Webp();
 
         parent::__construct($name);

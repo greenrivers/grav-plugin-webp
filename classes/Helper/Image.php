@@ -37,7 +37,8 @@ class Image
      */
     public function isWebp(SplFileInfo $image): bool
     {
-        return $image->getExtension() === self::WEBP_EXTENSION;
+        return $image->getExtension() === self::WEBP_EXTENSION &&
+            exif_imagetype($image->getPathname()) === IMAGETYPE_WEBP;
     }
 
     /**
