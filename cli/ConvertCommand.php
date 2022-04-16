@@ -105,7 +105,7 @@ class ConvertCommand extends ConsoleCommand
         } else if ($path) {
             [$result, $message] = $this->convert($lang, $path, $override, $quality);
         } else {
-            $message = $lang->translate('PLUGIN_WEBP.CONVERSION_PATH_OPTION_ERROR');
+            $message = $lang->translate('PLUGIN_WEBP.PATH_OPTION_ERROR');
         }
 
         $status = $result | 0;
@@ -142,10 +142,10 @@ class ConvertCommand extends ConsoleCommand
                 $result = $this->converter->convert($imageData, $quality);
                 $message = $lang->translate(['PLUGIN_WEBP.CONVERSION_SUCCESS_MESSAGE', $webpPath]);
             } else {
-                $message = $lang->translate(['PLUGIN_WEBP.CONVERSION_WEBP_IMAGE_EXISTS_ERROR', self::OVERRIDE_OPTION_NAME]);
+                $message = $lang->translate(['PLUGIN_WEBP.WEBP_IMAGE_EXISTS_ERROR', self::OVERRIDE_OPTION_NAME]);
             }
         } else {
-            $message = $lang->translate('PLUGIN_WEBP.CONVERSION_IMAGE_NOT_FOUND_ERROR');
+            $message = $lang->translate('PLUGIN_WEBP.IMAGE_NOT_FOUND_ERROR');
         }
 
         return [$result, $message];

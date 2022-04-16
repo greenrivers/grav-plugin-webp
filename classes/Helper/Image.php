@@ -32,6 +32,15 @@ class Image
     }
 
     /**
+     * @param SplFileInfo $image
+     * @return bool
+     */
+    public function isWebp(SplFileInfo $image): bool
+    {
+        return $image->getExtension() === self::WEBP_EXTENSION;
+    }
+
+    /**
      * @param string $pathname
      * @param string $filenameWithoutExtension
      * @return string

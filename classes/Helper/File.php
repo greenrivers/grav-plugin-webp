@@ -48,7 +48,7 @@ class File
         $file = null;
         $filename = $this->stringStartsWith($filename, ROOT_DIR) ? $filename : ROOT_DIR . $filename;
 
-        $extensions = ['*.jpg', '*.jpeg', '*.png'];
+        $extensions = ['*.jpg', '*.jpeg', '*.png', '*.webp'];
         $finder = $this->finder
             ->in(ROOT_DIR)
             ->files()
