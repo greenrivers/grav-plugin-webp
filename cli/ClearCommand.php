@@ -7,9 +7,8 @@
 
 namespace Grav\Plugin\Console;
 
-use Grav\Common\Grav;
 use Grav\Common\Language\Language;
-use Grav\Console\ConsoleCommand;
+use Grav\Plugin\Webp\Console\ConsoleCommand;
 use Grav\Plugin\Webp\Helper\Clear;
 use Grav\Plugin\Webp\Helper\File;
 use Grav\Plugin\Webp\Helper\Image;
@@ -77,6 +76,7 @@ class ClearCommand extends ConsoleCommand
     protected function serve(): int
     {
         $result = false;
+        $messageType = self::MESSAGE_TYPE_SUCCESS;
         $lang = self::getLanguage();
 
         $path = $this->input->getOption(self::PATH_OPTION_NAME);
@@ -84,15 +84,15 @@ class ClearCommand extends ConsoleCommand
         $all = $this->input->getOption(self::ALL_OPTION_NAME);
 
         if ($all) {
-            [$result, $message] = $this->clearAll($lang);
+            [$result, $message, $messageType] = $this->clearAll($lang);
         } else if ($path) {
-            [$result, $message] = $this->clear($lang, $path);
+            [$result, $message, $messageType] = $this->clear($lang, $path);
         } else {
             $message = $lang->translate('PLUGIN_WEBP.PATH_OPTION_ERROR');
         }
 
         $status = $result | 0;
-        $result ? $this->output->success($message) : $this->output->error($message);
+        $this->printMessage($message, $messageType);
 
         return $status;
     }
@@ -105,6 +105,7 @@ class ClearCommand extends ConsoleCommand
     private function clear(Language $lang, string $webpPath): array
     {
         $result = false;
+        $messageType = self::MESSAGE_TYPE_SUCCESS;
         $webpImage = $this->file->getFile($webpPath);
 
         if ($webpImage) {
@@ -115,12 +116,14 @@ class ClearCommand extends ConsoleCommand
                 $message = $lang->translate(['PLUGIN_WEBP.CLEAR_SUCCESS_MESSAGE', $webpPath]);
             } else {
                 $message = $lang->translate('PLUGIN_WEBP.IMAGE_NOT_WEBP_ERROR');
+                $messageType = self::MESSAGE_TYPE_ERROR;
             }
         } else {
             $message = $lang->translate('PLUGIN_WEBP.IMAGE_NOT_FOUND_ERROR');
+            $messageType = self::MESSAGE_TYPE_ERROR;
         }
 
-        return [$result, $message];
+        return [$result, $message, $messageType];
     }
 
     /**
@@ -129,6 +132,7 @@ class ClearCommand extends ConsoleCommand
      */
     private function clearAll(Language $lang): array
     {
+        $messageType = self::MESSAGE_TYPE_SUCCESS;
         $webpImages = $this->webp->getImagesToRemove();
         $removedImages = 0;
         $totalImages = count($webpImages);
@@ -149,18 +153,10 @@ class ClearCommand extends ConsoleCommand
 
             $message = $lang->translate(['PLUGIN_WEBP.CLEAR_ALL_SUCCESS_MESSAGE', $removedImages, $totalImages]);
         } else {
-            $message = $lang->translate('PLUGIN_WEBP.CLEAR_ALL_NO_IMAGES_MESSAGE');
+            $message = $lang->translate('PLUGIN_WEBP.NO_IMAGES_TO_REMOVE_MESSAGE');
+            $messageType = self::MESSAGE_TYPE_INFO;
         }
 
-        return [true, $message];
-    }
-
-    /**
-     * @return Language
-     */
-    private static function getLanguage(): Language
-    {
-        $grav = Grav::instance();
-        return $grav['language'];
+        return [true, $message, $messageType];
     }
 }

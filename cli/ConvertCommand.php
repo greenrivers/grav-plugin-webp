@@ -7,9 +7,8 @@
 
 namespace Grav\Plugin\Console;
 
-use Grav\Common\Grav;
 use Grav\Common\Language\Language;
-use Grav\Console\ConsoleCommand;
+use Grav\Plugin\Webp\Console\ConsoleCommand;
 use Grav\Plugin\Webp\Helper\Converter;
 use Grav\Plugin\Webp\Helper\File;
 use Grav\Plugin\Webp\Helper\Image;
@@ -24,6 +23,8 @@ class ConvertCommand extends ConsoleCommand
     private const OVERRIDE_OPTION_NAME = 'overwrite';
 
     private const ALL_OPTION_NAME = 'all';
+
+    private const MAX_QUALITY = 100;
 
     /** @var File */
     private $file;
@@ -70,7 +71,7 @@ class ConvertCommand extends ConsoleCommand
                 'qlt',
                 InputOption::VALUE_OPTIONAL,
                 'Conversion quality',
-                100
+                self::MAX_QUALITY
             )
             ->addOption(
                 self::OVERRIDE_OPTION_NAME,
@@ -92,6 +93,7 @@ class ConvertCommand extends ConsoleCommand
     protected function serve(): int
     {
         $result = false;
+        $messageType = self::MESSAGE_TYPE_SUCCESS;
         $lang = self::getLanguage();
 
         $path = $this->input->getOption(self::PATH_OPTION_NAME);
@@ -101,15 +103,15 @@ class ConvertCommand extends ConsoleCommand
         $all = $this->input->getOption(self::ALL_OPTION_NAME);
 
         if ($all) {
-            [$result, $message] = $this->convertAll($lang, $quality);
+            [$result, $message, $messageType] = $this->convertAll($lang, $quality);
         } else if ($path) {
-            [$result, $message] = $this->convert($lang, $path, $override, $quality);
+            [$result, $message, $messageType] = $this->convert($lang, $path, $override, $quality);
         } else {
             $message = $lang->translate('PLUGIN_WEBP.PATH_OPTION_ERROR');
         }
 
         $status = $result | 0;
-        $result ? $this->output->success($message) : $this->output->error($message);
+        $this->printMessage($message, $messageType);
 
         return $status;
     }
@@ -124,6 +126,7 @@ class ConvertCommand extends ConsoleCommand
     private function convert(Language $lang, string $path, bool $override, int $quality): array
     {
         $result = false;
+        $messageType = self::MESSAGE_TYPE_SUCCESS;
         $image = $this->file->getFile($path);
 
         if ($image) {
@@ -143,12 +146,14 @@ class ConvertCommand extends ConsoleCommand
                 $message = $lang->translate(['PLUGIN_WEBP.CONVERSION_SUCCESS_MESSAGE', $webpPath]);
             } else {
                 $message = $lang->translate(['PLUGIN_WEBP.WEBP_IMAGE_EXISTS_ERROR', self::OVERRIDE_OPTION_NAME]);
+                $messageType = self::MESSAGE_TYPE_ERROR;
             }
         } else {
             $message = $lang->translate('PLUGIN_WEBP.IMAGE_NOT_FOUND_ERROR');
+            $messageType = self::MESSAGE_TYPE_ERROR;
         }
 
-        return [$result, $message];
+        return [$result, $message, $messageType];
     }
 
     /**
@@ -158,6 +163,7 @@ class ConvertCommand extends ConsoleCommand
      */
     private function convertAll(Language $lang, int $quality): array
     {
+        $messageType = self::MESSAGE_TYPE_SUCCESS;
         $images = $this->webp->getImagesToConversion();
         $convertedImages = 0;
         $totalImages = count($images);
@@ -178,18 +184,10 @@ class ConvertCommand extends ConsoleCommand
 
             $message = $lang->translate(['PLUGIN_WEBP.CONVERSION_ALL_SUCCESS_MESSAGE', $convertedImages, $totalImages]);
         } else {
-            $message = $lang->translate('PLUGIN_WEBP.CONVERSION_ALL_NO_IMAGES_MESSAGE');
+            $message = $lang->translate('PLUGIN_WEBP.NO_IMAGES_TO_CONVERSION_MESSAGE');
+            $messageType = self::MESSAGE_TYPE_INFO;
         }
 
-        return [true, $message];
-    }
-
-    /**
-     * @return Language
-     */
-    private static function getLanguage(): Language
-    {
-        $grav = Grav::instance();
-        return $grav['language'];
+        return [true, $message, $messageType];
     }
 }
