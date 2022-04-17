@@ -58,6 +58,8 @@ Note that if you use the Admin Plugin, a file with your configuration named webp
 
 ## Usage
 
+#### Plugin config
+
 1. Quality
     - Set up value on slider range
     - Quality percent value is displayed below the slider
@@ -75,6 +77,38 @@ Note that if you use the Admin Plugin, a file with your configuration named webp
     - Info about number of the removed webp images appears next to the **Clear all** button.
 
 ![Clear all](assets/images/clear_all.webp)
+
+#### Console commands
+
+1. Convert to webp format
+
+- image by given path
+
+```shell
+php bin/plugin webp convert --path=<path_to_image> [--quality=<quality>] [--overwrite]
+```
+
+- all images
+
+```shell
+php bin/plugin webp convert --all [--quality=<quality>]
+```
+
+2. Clear
+
+- webp image by given path
+
+```shell
+php bin/plugin webp clear --path=<path_to_image>
+```
+
+- all webp images
+
+```shell
+php bin/plugin webp clear --all
+```
+
+#### Notes
 
 Plugin supports following extensions:
 
@@ -119,5 +153,5 @@ https://developers.google.com/speed/webp
 
 - [x] Create **Clear all** option
 - [x] Create image quality option
-- [ ] Add console commands
+- [x] Add console commands
 - [ ] Add unit tests
