@@ -14,6 +14,7 @@ use Grav\Common\Plugin;
 use Grav\Common\Twig\Twig;
 use Grav\Common\Uri;
 use Grav\Framework\Session\SessionInterface;
+use Grav\Plugin\Webp\Helper\Config;
 use Grav\Plugin\Webp\Utils\Response;
 use Grav\Plugin\Webp\Webp;
 use RocketTheme\Toolbox\Event\Event;
@@ -173,7 +174,7 @@ class WebpPlugin extends Plugin
      */
     public function onTwigInitialized(Event $event): void
     {
-        if (self::isEnabled()) {
+        if (Config::isEnabled()) {
             /** @var Twig $gravTwig */
             $gravTwig = $this->grav['twig'];
 
@@ -203,13 +204,5 @@ class WebpPlugin extends Plugin
     public function extension(string $imagePath): string
     {
         return $this->webp->getImageExtension($imagePath);
-    }
-
-    /**
-     * @return bool
-     */
-    private static function isEnabled(): bool
-    {
-        return Grav::instance()['config']->get('plugins.webp.enabled');
     }
 }

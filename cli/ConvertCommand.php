@@ -9,6 +9,7 @@ namespace Grav\Plugin\Console;
 
 use Grav\Common\Language\Language;
 use Grav\Plugin\Webp\Console\ConsoleCommand;
+use Grav\Plugin\Webp\Helper\Config;
 use Grav\Plugin\Webp\Helper\Converter;
 use Grav\Plugin\Webp\Helper\File;
 use Grav\Plugin\Webp\Helper\Image;
@@ -71,7 +72,7 @@ class ConvertCommand extends ConsoleCommand
                 'qlt',
                 InputOption::VALUE_OPTIONAL,
                 'Conversion quality',
-                self::MAX_QUALITY
+                Config::getQuality() ?? self::MAX_QUALITY
             )
             ->addOption(
                 self::OVERRIDE_OPTION_NAME,
