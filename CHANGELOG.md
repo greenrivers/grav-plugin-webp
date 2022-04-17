@@ -1,3 +1,12 @@
+# v1.3.0
+##  04/17/2022
+
+1. [](#new)
+    * Added console command for conversion
+    * Added console command for clear webp images
+2. [](#improved)
+    * Updated README
+
 # v1.2.1
 ##  03/19/2022
 
