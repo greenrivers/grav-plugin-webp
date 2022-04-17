@@ -93,7 +93,6 @@ class ConvertCommand extends ConsoleCommand
     protected function serve(): int
     {
         $result = false;
-        $messageType = self::MESSAGE_TYPE_SUCCESS;
         $lang = self::getLanguage();
 
         $path = $this->input->getOption(self::PATH_OPTION_NAME);
@@ -108,6 +107,7 @@ class ConvertCommand extends ConsoleCommand
             [$result, $message, $messageType] = $this->convert($lang, $path, $override, $quality);
         } else {
             $message = $lang->translate('PLUGIN_WEBP.PATH_OPTION_ERROR');
+            $messageType = self::MESSAGE_TYPE_ERROR;
         }
 
         $status = $result | 0;
@@ -130,22 +130,27 @@ class ConvertCommand extends ConsoleCommand
         $image = $this->file->getFile($path);
 
         if ($image) {
-            $imageData = $this->image->getImageData($image, true);
+            if (!$this->image->isWebp($image)) {
+                $imageData = $this->image->getImageData($image, true);
 
-            $webpPath = $this->image->getWebpPath(
-                $image->getRelativePath(),
-                $image->getFilenameWithoutExtension()
-            );
+                $webpPath = $this->image->getWebpPath(
+                    $image->getRelativePath(),
+                    $image->getFilenameWithoutExtension()
+                );
 
-            $imageExists = $this->file->fileExists($path);
-            $webpExistsAndOverride = $this->file->fileExists($webpPath) && $override;
-            $webpNotExists = !$this->file->fileExists($webpPath);
+                $imageExists = $this->file->fileExists($path);
+                $webpExistsAndOverride = $this->file->fileExists($webpPath) && $override;
+                $webpNotExists = !$this->file->fileExists($webpPath);
 
-            if ($imageExists && ($webpExistsAndOverride || $webpNotExists)) {
-                $result = $this->converter->convert($imageData, $quality);
-                $message = $lang->translate(['PLUGIN_WEBP.CONVERSION_SUCCESS_MESSAGE', $webpPath]);
+                if ($imageExists && ($webpExistsAndOverride || $webpNotExists)) {
+                    $result = $this->converter->convert($imageData, $quality);
+                    $message = $lang->translate(['PLUGIN_WEBP.CONVERSION_SUCCESS_MESSAGE', $webpPath]);
+                } else {
+                    $message = $lang->translate(['PLUGIN_WEBP.WEBP_IMAGE_EXISTS_ERROR', self::OVERRIDE_OPTION_NAME]);
+                    $messageType = self::MESSAGE_TYPE_ERROR;
+                }
             } else {
-                $message = $lang->translate(['PLUGIN_WEBP.WEBP_IMAGE_EXISTS_ERROR', self::OVERRIDE_OPTION_NAME]);
+                $message = $lang->translate('PLUGIN_WEBP.IMAGE_WEBP_ERROR');
                 $messageType = self::MESSAGE_TYPE_ERROR;
             }
         } else {

@@ -60,7 +60,7 @@ class ClearCommand extends ConsoleCommand
                 self::PATH_OPTION_NAME,
                 'p',
                 InputOption::VALUE_REQUIRED,
-                'Path to image'
+                'Path to webp image'
             )
             ->addOption(
                 self::ALL_OPTION_NAME,
@@ -76,7 +76,6 @@ class ClearCommand extends ConsoleCommand
     protected function serve(): int
     {
         $result = false;
-        $messageType = self::MESSAGE_TYPE_SUCCESS;
         $lang = self::getLanguage();
 
         $path = $this->input->getOption(self::PATH_OPTION_NAME);
@@ -89,6 +88,7 @@ class ClearCommand extends ConsoleCommand
             [$result, $message, $messageType] = $this->clear($lang, $path);
         } else {
             $message = $lang->translate('PLUGIN_WEBP.PATH_OPTION_ERROR');
+            $messageType = self::MESSAGE_TYPE_ERROR;
         }
 
         $status = $result | 0;

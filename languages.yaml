@@ -11,6 +11,7 @@ en:
     NO_IMAGES_TO_REMOVE_MESSAGE: 'There are no images to remove.'
     WEBP_IMAGE_EXISTS_ERROR: 'Webp image exists, please run command with --%s option.'
     IMAGE_NOT_FOUND_ERROR: 'Image not found.'
+    IMAGE_WEBP_ERROR: 'Image already has webp format.'
     IMAGE_NOT_WEBP_ERROR: 'Image has no webp format.'
     PATH_OPTION_ERROR: 'Path option not defined.'
 pl:
@@ -26,5 +27,6 @@ pl:
     NO_IMAGES_TO_REMOVE_MESSAGE: 'Brak obrazków do usunięcia.'
     WEBP_IMAGE_EXISTS_ERROR: 'Obraz Webp już istnieje, proszę uruchomić komendę z parametrem --%s.'
     IMAGE_NOT_FOUND_ERROR: 'Obraz nie został odnaleziony.'
+    IMAGE_WEBP_ERROR: 'Obraz posiada już format webp.'
     IMAGE_NOT_WEBP_ERROR: 'Obraz nie posiada formatu webp.'
     PATH_OPTION_ERROR: 'Nie zdefiniowano parametru path.'

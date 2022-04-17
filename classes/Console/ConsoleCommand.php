@@ -1,4 +1,9 @@
 <?php
+/**
+ * @author Greenrivers
+ * @copyright Copyright (c) 2022 Greenrivers
+ * @package Grav\Plugin\Webp
+ */
 
 namespace Grav\Plugin\Webp\Console;
 
@@ -23,15 +28,6 @@ class ConsoleCommand extends BaseConsoleCommand
 
     /**
      * @param string $message
-     * @return void
-     */
-    protected function info(string $message): void
-    {
-        $this->output->block($message, 'INFO', 'fg=black;bg=blue', ' ', true);
-    }
-
-    /**
-     * @param string $message
      * @param string $messageType
      * @return void
      */
@@ -48,5 +44,14 @@ class ConsoleCommand extends BaseConsoleCommand
                 $this->output->error($message);
                 break;
         }
+    }
+
+    /**
+     * @param string $message
+     * @return void
+     */
+    protected function info(string $message): void
+    {
+        $this->output->block($message, 'INFO', 'fg=black;bg=blue', ' ', true);
     }
 }
