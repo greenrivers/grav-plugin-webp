@@ -6,7 +6,9 @@
 const gulp = require('gulp');
 const concat = require('gulp-concat');
 const terser = require('gulp-terser');
-const sass = require('gulp-sass');
+const dartSass = require('sass');
+const gulpSass = require('gulp-sass');
+const sass = gulpSass(dartSass);
 const cleancss = require('gulp-clean-css');
 const csscomb = require('gulp-csscomb');
 const rename = require('gulp-rename');
@@ -32,7 +34,7 @@ const compileCSS = () => {
     return src(cssPath)
         .pipe(sourcemaps.init())
         .pipe(sass({
-                outputStyle: 'compact',
+                outputStyle: 'compressed',
                 precision: 10
             }).on('error', sass.logError)
         )
