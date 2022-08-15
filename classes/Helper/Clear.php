@@ -28,7 +28,7 @@ class Clear
      */
     public function removeImage(array $image): bool
     {
-        $webpPath = $image['pathinfo']['pathname'];
+        $webpPath = $image['pathname'];
 
         $this->filesystem->remove($webpPath);
 
