@@ -1,3 +1,11 @@
+# v1.4.0
+##  08/16/2022
+
+1. [](#new)
+    * Added unit tests
+2. [](#improved)
+    * Updated README
+
 # v1.3.0
 ##  04/17/2022
 
