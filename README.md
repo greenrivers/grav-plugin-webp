@@ -143,6 +143,14 @@ To resolve it, save config again with **Enabled** status.
 
 ![Plugin enabled bug](assets/images/plugin-enabled-bug.webp)
 
+## Testing
+
+Run unit tests from root plugin path (**user/plugins/webp**):
+
+```
+php vendor/bin/codecept run unit
+```
+
 ## Credits
 
 https://www.php.net/manual/en/image.installation.php
@@ -154,4 +162,4 @@ https://developers.google.com/speed/webp
 - [x] Create **Clear all** option
 - [x] Create image quality option
 - [x] Add console commands
-- [ ] Add unit tests
+- [x] Add unit tests
