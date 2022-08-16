@@ -157,7 +157,7 @@ https://www.php.net/manual/en/image.installation.php
 
 https://developers.google.com/speed/webp
 
-## To Do
+## ToDo
 
 - [x] Create **Clear all** option
 - [x] Create image quality option
