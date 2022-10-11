@@ -1,3 +1,11 @@
+# v1.4.1
+##  10/11/2022
+
+1. [](#bugfix)
+    * Fixed progressbar
+2. [](#improved)
+    * Updated README
+
 # v1.4.0
 ##  08/16/2022
 
