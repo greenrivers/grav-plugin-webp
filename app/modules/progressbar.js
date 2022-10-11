@@ -34,16 +34,17 @@ export default function progressbar() {
             type: 'POST'
         }).then((data) => {
             const {converted_images} = data;
-            let width = Math.round(
-                parseInt(progressbar.css('width')) / parseInt(progressbar.parent().css('width')) * 100
-            ) + Math.round(100 / total_images);
+            let width = (parseFloat(progressbar.css('width')) / parseFloat(progressbar.parent().css('width')) * 100) +
+                (100 / total_images);
+            let progress = Math.round(width);
 
             if (converted_images === total_images) {
                 width = 100;
+                progress = 100;
             }
 
             progressbar.css('width', `${width}%`);
-            progressbar.html(`${width}%`);
+            progressbar.html(`${progress}%`);
             convert.prop('disabled', true);
             result.html(`Converted ${converted_images}/${total_images} images.`);
 
