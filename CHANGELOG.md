@@ -1,3 +1,9 @@
+# v1.4.2
+##  12/26/2022
+
+1. [](#bugfix)
+    * Fixed incorrect exif orientation [#7](https://github.com/greenrivers/grav-plugin-webp/issues/7)
+
 # v1.4.1
 ##  10/11/2022
 
