@@ -39,6 +39,8 @@ class Converter
         $webpDir = $this->image->getWebpDir($pathname);
         $webpPath = $this->image->getWebpPath($pathname, $filenameWithoutExtension);
 
+        Image::adjustImageOrientation($imagePath);
+
         if ($extension === self::PNG_EXTENSION) {
             $image = @imagecreatefrompng($imagePath);
             @imagepalettetotruecolor($image);
