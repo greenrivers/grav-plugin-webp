@@ -1,3 +1,9 @@
+# v1.4.3
+##  02/23/2023
+
+1. [](#bugfix)
+    * Fixed undefined Orientation index
+
 # v1.4.2
 ##  12/26/2022
 
