@@ -90,7 +90,8 @@ class Image
             Logger::addErrorMessage($e->getMessage());
         }
 
-        $orientation = $exifData ? $exifData['Orientation'] : false;
+        $orientation = ($exifData && array_key_exists('Orientation', $exifData)) ?
+            $exifData['Orientation'] : false;
 
         if ($orientation && $orientation !== self::EXIF_ROTATION_0) {
             switch (@exif_imagetype($imagePath)) {
