@@ -40,8 +40,9 @@ If you use the Admin Plugin, you can install the plugin directly by browsing the
 
 Make sure that You have installed and enabled webp support:
 
-- install packages: libwebp-dev, webp
+- install system packages: libwebp-dev, webp
 - enable GD and configure PHP to enable support for webp format
+- install & enable PHP Exif extension
 
 ## Configuration
 
