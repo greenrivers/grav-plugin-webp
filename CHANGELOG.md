@@ -1,3 +1,9 @@
+# v1.4.5
+##  11/09/2023
+
+1. [](#bugfix)
+    * Fixed relative path [#12](https://github.com/greenrivers/grav-plugin-webp/issues/12)
+
 # v1.4.4
 ##  08/26/2023
 
