@@ -36,7 +36,7 @@ class View
 
         $webpPath = $this->image->getWebpPath($pathname, $imageNameWithoutExtension);
 
-        return file_exists($webpPath) ? $webpPath : $imagePath;
+        return file_exists($webpPath) ? (DIRECTORY_SEPARATOR . $webpPath) : $imagePath;
     }
 
     /**
