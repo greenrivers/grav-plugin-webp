@@ -6,16 +6,19 @@
 import $ from 'jquery';
 
 export default function progressbar() {
+    const {base_url_relative = '/admin'} = window.GravAdmin.config;
+
     const quality = $('#quality');
 
     const convert = $('#convert');
     const result = $('.conversion-field .result');
     const progressbar = $('.conversion-field #progressbar');
+
     let total_images = 0;
 
     const setQuality = () => {
         $.ajax({
-            url: '/admin/plugins/webp/quality',
+            url: `${base_url_relative}/plugins/webp/quality`,
             async: false,
             type: 'POST',
             data: {quality: quality.val()}
@@ -30,7 +33,7 @@ export default function progressbar() {
 
     const convertImages = () => {
         $.ajax({
-            url: '/admin/plugins/webp/convert',
+            url: `${base_url_relative}/plugins/webp/convert`,
             type: 'POST'
         }).then((data) => {
             const {converted_images} = data;
@@ -58,7 +61,7 @@ export default function progressbar() {
 
     convert.on('click', () => {
         $.ajax({
-            url: '/admin/plugins/webp/images',
+            url: `${base_url_relative}/plugins/webp/images`,
             type: 'GET'
         }).done(data => {
             total_images = data.total_images;

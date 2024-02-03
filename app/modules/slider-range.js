@@ -6,6 +6,8 @@
 import $ from 'jquery';
 
 export default function sliderRange() {
+    const {base_url_relative = '/admin'} = window.GravAdmin.config;
+
     const saveBtn = $('button.button[name="task"]');
 
     const quality = $('#quality');
@@ -13,7 +15,7 @@ export default function sliderRange() {
 
     const setQuality = () => {
         $.ajax({
-            url: '/admin/plugins/webp/quality',
+            url: `${base_url_relative}/plugins/webp/quality`,
             async: false,
             type: 'POST',
             data: {quality: quality.val()}

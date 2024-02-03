@@ -6,6 +6,8 @@
 import $ from 'jquery';
 
 export default function spinnerLoader() {
+    const {base_url_relative = '/admin'} = window.GravAdmin.config;
+
     const clearAll = $('#clear_all');
     const result = $('.clear-all-field .result');
     const spinner = $('.clear-all-field .spinner');
@@ -18,7 +20,7 @@ export default function spinnerLoader() {
 
     const clearAllImages = () => {
         $.ajax({
-            url: '/admin/plugins/webp/clear_all',
+            url: `${base_url_relative}/plugins/webp/clear_all`,
             type: 'POST'
         }).then((data) => {
             const {removed_images} = data;
@@ -43,7 +45,7 @@ export default function spinnerLoader() {
 
     clearAll.on('click', () => {
         $.ajax({
-            url: '/admin/plugins/webp/webp_images',
+            url: `${base_url_relative}/plugins/webp/webp_images`,
             type: 'GET'
         }).done((data) => {
             webp_images = data.webp_images;
