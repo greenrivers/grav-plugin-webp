@@ -1,3 +1,9 @@
+# v1.4.6
+##  02/03/2024
+
+1. [](#bugfix)
+    * Fixed custom admin route [#14](https://github.com/greenrivers/grav-plugin-webp/issues/14)
+
 # v1.4.5
 ##  11/09/2023
 
