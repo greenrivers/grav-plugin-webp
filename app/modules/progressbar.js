@@ -8,6 +8,7 @@ import $ from 'jquery';
 export default function progressbar() {
     const {base_url_relative = '/admin'} = window.GravAdmin.config;
 
+    const originalPath = $('input[name="data[original_path]"]');
     const quality = $('#quality');
 
     const convert = $('#convert');
@@ -16,18 +17,63 @@ export default function progressbar() {
 
     let total_images = 0;
 
-    const setQuality = () => {
+    originalPath.on('click', () => {
+        setConfig()
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    })
+
+    convert.on('click', () => {
         $.ajax({
-            url: `${base_url_relative}/plugins/webp/quality`,
-            async: false,
-            type: 'POST',
-            data: {quality: quality.val()}
+            url: `${base_url_relative}/plugins/webp/images`,
+            type: 'GET'
         }).done(data => {
-            if (data.status) {
-                convertImages();
+            total_images = data.total_images;
+
+            if (total_images > 0) {
+                progressbar.css('width', `0%`);
+                progressbar.html(`0%`);
+
+                setConfig()
+                    .then((data) => {
+                        const {original_path, quality} = data;
+                        if (original_path && quality) {
+                            convertImages();
+                        }
+                    })
+                    .catch((error) => {
+                        console.error(error)
+                    })
+            } else {
+                result.html('No images to conversion.');
             }
         }).fail(data => {
             console.error(data);
+        })
+    });
+
+    const setConfig = () => {
+        const checkedOriginalPath = $('input[name="data[original_path]"]:checked');
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: `${base_url_relative}/plugins/webp/set_config`,
+                async: false,
+                type: 'POST',
+                data: {
+                    original_path: checkedOriginalPath.val(),
+                    quality: quality.val()
+                },
+                success: (data) => {
+                    resolve(data);
+                },
+                error: (error) => {
+                    reject(error);
+                }
+            });
         });
     }
 
@@ -58,24 +104,4 @@ export default function progressbar() {
             }
         });
     }
-
-    convert.on('click', () => {
-        $.ajax({
-            url: `${base_url_relative}/plugins/webp/images`,
-            type: 'GET'
-        }).done(data => {
-            total_images = data.total_images;
-
-            if (total_images > 0) {
-                progressbar.css('width', `0%`);
-                progressbar.html(`0%`);
-
-                setQuality();
-            } else {
-                result.html('No images to conversion.');
-            }
-        }).fail(data => {
-            console.error(data);
-        })
-    });
 }

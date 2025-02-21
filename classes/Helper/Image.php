@@ -56,14 +56,19 @@ class Image
     }
 
     /**
+     * @param bool $originalPath
      * @param string $pathname
      * @param string $filenameWithoutExtension
      * @return string
      */
-    public function getWebpPath(string $pathname, string $filenameWithoutExtension): string
+    public function getWebpPath(bool $originalPath, string $pathname, string $filenameWithoutExtension): string
     {
+        if ($originalPath) {
+            return $this->getOriginalWebpPath($pathname, $filenameWithoutExtension);
+        }
+
         $webpDir = $this->getWebpDir($pathname);
-        return $webpDir . DIRECTORY_SEPARATOR . $filenameWithoutExtension . '.' . self::WEBP_EXTENSION;
+        return $this->getOriginalWebpPath($webpDir, $filenameWithoutExtension);
     }
 
     /**
@@ -155,5 +160,15 @@ class Image
                 }
             }
         }
+    }
+
+    /**
+     * @param string $pathname
+     * @param string $filenameWithoutExtension
+     * @return string
+     */
+    private function getOriginalWebpPath(string $pathname, string $filenameWithoutExtension): string
+    {
+        return $pathname . DIRECTORY_SEPARATOR . $filenameWithoutExtension . '.' . self::WEBP_EXTENSION;
     }
 }

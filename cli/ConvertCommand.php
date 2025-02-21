@@ -20,6 +20,7 @@ use Symfony\Component\Console\Input\InputOption;
 class ConvertCommand extends ConsoleCommand
 {
     private const PATH_OPTION_NAME = 'path';
+    private const ORIGINAL_PATH_OPTION_NAME = 'original_path';
     private const QUALITY_OPTION_NAME = 'quality';
     private const OVERRIDE_OPTION_NAME = 'overwrite';
 
@@ -68,6 +69,13 @@ class ConvertCommand extends ConsoleCommand
                 'Path to image'
             )
             ->addOption(
+                self::ORIGINAL_PATH_OPTION_NAME,
+                'op',
+                InputOption::VALUE_OPTIONAL,
+                'Save the webp image in the same directory as the original image',
+                Config::isOriginalPath()
+            )
+            ->addOption(
                 self::QUALITY_OPTION_NAME,
                 'qlt',
                 InputOption::VALUE_OPTIONAL,
@@ -97,15 +105,16 @@ class ConvertCommand extends ConsoleCommand
         $lang = self::getLanguage();
 
         $path = $this->input->getOption(self::PATH_OPTION_NAME);
+        $originalPath = $this->input->getOption(self::ORIGINAL_PATH_OPTION_NAME);
         $quality = $this->input->getOption(self::QUALITY_OPTION_NAME);
         $override = $this->input->getOption(self::OVERRIDE_OPTION_NAME);
 
         $all = $this->input->getOption(self::ALL_OPTION_NAME);
 
         if ($all) {
-            [$result, $message, $messageType] = $this->convertAll($lang, $quality);
+            [$result, $message, $messageType] = $this->convertAll($lang, $originalPath, $quality);
         } else if ($path) {
-            [$result, $message, $messageType] = $this->convert($lang, $path, $override, $quality);
+            [$result, $message, $messageType] = $this->convert($lang, $path, $override, $originalPath, $quality);
         } else {
             $message = $lang->translate('PLUGIN_WEBP.PATH_OPTION_ERROR');
             $messageType = self::MESSAGE_TYPE_ERROR;
@@ -121,10 +130,11 @@ class ConvertCommand extends ConsoleCommand
      * @param Language $lang
      * @param string $path
      * @param bool $override
+     * @param bool $originalPath
      * @param int $quality
      * @return array
      */
-    private function convert(Language $lang, string $path, bool $override, int $quality): array
+    private function convert(Language $lang, string $path, bool $override, bool $originalPath, int $quality): array
     {
         $result = false;
         $messageType = self::MESSAGE_TYPE_SUCCESS;
@@ -135,6 +145,7 @@ class ConvertCommand extends ConsoleCommand
                 $imageData = $this->image->getImageData($image, true);
 
                 $webpPath = $this->image->getWebpPath(
+                    $originalPath,
                     $image->getRelativePath(),
                     $image->getFilenameWithoutExtension()
                 );
@@ -144,7 +155,7 @@ class ConvertCommand extends ConsoleCommand
                 $webpNotExists = !$this->file->fileExists($webpPath);
 
                 if ($imageExists && ($webpExistsAndOverride || $webpNotExists)) {
-                    $result = $this->converter->convert($imageData, $quality);
+                    $result = $this->converter->convert($imageData, $originalPath, $quality);
                     $message = $lang->translate(['PLUGIN_WEBP.CONVERSION_SUCCESS_MESSAGE', $webpPath]);
                 } else {
                     $message = $lang->translate(['PLUGIN_WEBP.WEBP_IMAGE_EXISTS_ERROR', self::OVERRIDE_OPTION_NAME]);
@@ -167,10 +178,10 @@ class ConvertCommand extends ConsoleCommand
      * @param int $quality
      * @return array
      */
-    private function convertAll(Language $lang, int $quality): array
+    private function convertAll(Language $lang, bool $originalPath, int $quality): array
     {
         $messageType = self::MESSAGE_TYPE_SUCCESS;
-        $images = $this->webp->getImagesToConversion();
+        $images = $this->webp->getImagesToConversion($originalPath);
         $convertedImages = 0;
         $totalImages = count($images);
 
@@ -179,7 +190,7 @@ class ConvertCommand extends ConsoleCommand
             $progressBar->start();
 
             foreach ($images as $image) {
-                if ($this->converter->convert($image, $quality)) {
+                if ($this->converter->convert($image, $originalPath, $quality)) {
                     $convertedImages++;
                     $progressBar->advance();
                 }

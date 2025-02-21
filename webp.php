@@ -75,18 +75,24 @@ class WebpPlugin extends Plugin
 
         if (isset($paths[2], $paths[3]) && $paths[2] === 'webp') {
             switch ($paths[3]) {
-                case 'quality':
+                case 'set_config':
+                    $originalPath = $uri->post('original_path');
                     $quality = $uri->post('quality');
+                    $session->__set('original_path', $originalPath);
                     $session->__set('quality', $quality);
 
-                    Response::sendJsonResponse(['status' => $session->__get('quality')]);
+                    Response::sendJsonResponse([
+                        'original_path' => $session->__get('original_path'),
+                        'quality' => $session->__get('quality')
+                    ]);
                     break;
                 case 'convert':
                     $totalImages = $session->getFlashObject('total_images');
                     $convertedImagesCount = $this->webp->process(
                         $totalImages,
                         $session->getFlashObject('converted_images_count'),
-                        $session->__get('quality')
+                        $session->__get('original_path'),
+                        $session->__get('quality'),
                     );
                     $session->setFlashObject('total_images', $totalImages);
                     $session->setFlashObject('converted_images_count', $convertedImagesCount);
@@ -112,7 +118,7 @@ class WebpPlugin extends Plugin
                     Response::sendJsonResponse(['webp_images' => count($webpImages)]);
                     break;
                 case 'images':
-                    $totalImages = $this->webp->getImagesToConversion();
+                    $totalImages = $this->webp->getImagesToConversion($session->__get('original_path'));
                     $session->setFlashObject('total_images', $totalImages);
                     $session->setFlashObject('converted_images_count', 0);
 
@@ -139,6 +145,7 @@ class WebpPlugin extends Plugin
         $session = $this->grav['session'];
 
         if ($object instanceof Data && $blueprints->getFilename() === 'webp/blueprints') {
+            $object->set('original_path', $session->__get('original_path'));
             $object->set('quality', $session->__get('quality'));
         }
     }

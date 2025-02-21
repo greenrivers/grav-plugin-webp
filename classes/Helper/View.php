@@ -34,7 +34,7 @@ class View
         $imageName = substr(strrchr($imagePath, DIRECTORY_SEPARATOR), 1);
         $imageNameWithoutExtension = substr($imageName, 0, strrpos($imageName, '.'));
 
-        $webpPath = $this->image->getWebpPath($pathname, $imageNameWithoutExtension);
+        $webpPath = $this->image->getWebpPath(Config::isOriginalPath(), $pathname, $imageNameWithoutExtension);
 
         return file_exists($webpPath) ? (DIRECTORY_SEPARATOR . $webpPath) : $imagePath;
     }

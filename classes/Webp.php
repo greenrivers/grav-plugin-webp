@@ -9,6 +9,7 @@ namespace Grav\Plugin\Webp;
 
 use Grav\Common\Filesystem\Folder;
 use Grav\Plugin\Webp\Helper\Clear;
+use Grav\Plugin\Webp\Helper\Config;
 use Grav\Plugin\Webp\Helper\Converter;
 use Grav\Plugin\Webp\Helper\File;
 use Grav\Plugin\Webp\Helper\Image;
@@ -49,9 +50,10 @@ class Webp
     }
 
     /**
+     * @param bool $originalPath
      * @return array
      */
-    public function getImagesToConversion(): array
+    public function getImagesToConversion(bool $originalPath): array
     {
         $imagesToConversion = [];
         $folders = ['user/images', 'user/pages', 'user/themes'];
@@ -72,6 +74,7 @@ class Webp
 
         foreach ($images as $image) {
             $webpPath = $this->image->getWebpPath(
+                $originalPath,
                 $image->getPathInfo()->getPathname(),
                 $image->getFilenameWithoutExtension()
             );
@@ -90,13 +93,18 @@ class Webp
     public function getImagesToRemove(): array
     {
         $imagesToRemove = [];
-        $folder = ['user/webp'];
+        $folders = [
+            'user/images',
+            'user/pages',
+            'user/themes',
+            'user/webp'
+        ];
         $extensions = ['*.webp'];
 
         $images = $this->finder
             ->ignoreDotFiles(false)
             ->files()
-            ->in($folder)
+            ->in($folders)
             ->exclude('node_modules')
             ->name($extensions);
 
@@ -110,15 +118,16 @@ class Webp
     /**
      * @param array $totalImages
      * @param int $convertedImagesCount
+     * @param bool $originalPath
      * @param int $quality
      * @return int
      */
-    public function process(array $totalImages, int $convertedImagesCount, int $quality): int
+    public function process(array $totalImages, int $convertedImagesCount, bool $originalPath, int $quality): int
     {
         $index = $convertedImagesCount;
 
         foreach ($totalImages as $key => $image) {
-            if ($key === $index && $this->converter->convert($image, $quality)) {
+            if ($key === $index && $this->converter->convert($image, $originalPath, $quality)) {
                 $convertedImagesCount++;
             }
         }

@@ -52,6 +52,7 @@ Here is the default configuration and an explanation of available options:
 
 ```yaml
 enabled: true
+original_path: 0
 quality: 100
 ```
 
@@ -61,19 +62,25 @@ Note that if you use the Admin Plugin, a file with your configuration named webp
 
 #### Plugin config
 
-1. Quality
+1. Original path
+    - Enable to save the webp image in the same directory as the original image
+    - Disable to save the webp image in the user/webp directory
+
+![Original path](assets/images/original_path.webp)
+
+2. Quality
     - Set up value on slider range
     - Quality percent value is displayed below the slider
 
 ![Quality](assets/images/quality.webp)
 
-2. Conversion
+3. Conversion
    - Click on **Convert** button from plugin settings in admin menu.
    - Info about number of the converted images appears next to the **Convert** button.
 
 ![Convert](assets/images/convert.webp)
 
-3. Clear all
+4. Clear all
     - Click on **Clear all** button from plugin settings in admin menu.
     - Info about number of the removed webp images appears next to the **Clear all** button.
 
@@ -86,13 +93,13 @@ Note that if you use the Admin Plugin, a file with your configuration named webp
 - image by given path
 
 ```shell
-php bin/plugin webp convert --path=<path_to_image> [--quality=<quality>] [--overwrite]
+php bin/plugin webp convert --path=<path_to_image> [--original_path=<1,0>] [--quality=<quality>] [--overwrite]
 ```
 
 - all images
 
 ```shell
-php bin/plugin webp convert --all [--quality=<quality>]
+php bin/plugin webp convert --all [--original_path=<1,0>] [--quality=<quality>]
 ```
 
 2. Clear

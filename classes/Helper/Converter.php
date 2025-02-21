@@ -26,10 +26,11 @@ class Converter
 
     /**
      * @param array $image
+     * @param bool $originalPath
      * @param int $quality
      * @return bool
      */
-    public function convert(array $image, int $quality): bool
+    public function convert(array $image, bool $originalPath, int $quality): bool
     {
         $extension = $image['extension'];
         $imagePath = $image['pathname'];
@@ -37,7 +38,7 @@ class Converter
         $filenameWithoutExtension = $image['filenamewithoutextension'];
 
         $webpDir = $this->image->getWebpDir($pathname);
-        $webpPath = $this->image->getWebpPath($pathname, $filenameWithoutExtension);
+        $webpPath = $this->image->getWebpPath($originalPath, $pathname, $filenameWithoutExtension);
 
         Image::adjustImageOrientation($imagePath);
 

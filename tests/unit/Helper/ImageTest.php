@@ -82,16 +82,31 @@ class ImageTest extends Unit
     }
 
     /**
-     * @covers Image::getWebpDir
+     * @covers Image::getWebpPath
      */
     public function testGetWebpPath()
     {
+        $originalPath = false;
         $pathname = 'user/themes/quark';
         $filenameWithoutExtension = 'thumbnail';
 
-        $result = $this->image->getWebpPath($pathname, $filenameWithoutExtension);
+        $result = $this->image->getWebpPath($originalPath, $pathname, $filenameWithoutExtension);
 
         $this->assertEquals('user/webp/user/themes/quark/thumbnail.webp', $result);
+    }
+
+    /**
+     * @covers Image::getWebpPath
+     */
+    public function testOriginalGetWebpPath()
+    {
+        $originalPath = true;
+        $pathname = 'user/themes/quark';
+        $filenameWithoutExtension = 'thumbnail';
+
+        $result = $this->image->getWebpPath($originalPath, $pathname, $filenameWithoutExtension);
+
+        $this->assertEquals('user/themes/quark/thumbnail.webp', $result);
     }
 
     /**

@@ -1,8 +1,10 @@
 en:
   PLUGIN_WEBP:
+    ORIGINAL_PATH_FIELD_LABEL: 'Original path'
     QUALITY_FIELD_LABEL: 'Quality'
     CONVERSION_FIELD_LABEL: 'Convert'
     CLEAR_ALL_FIELD_LABEL: 'Clear all'
+    ORIGINAL_PATH_FIELD_HELPER: 'Save the webp image in the same directory as the original image.'
     CONVERSION_ALL_SUCCESS_MESSAGE: 'Converted %d/%d images.'
     CONVERSION_SUCCESS_MESSAGE: 'Conversion success, webp image path: %s.'
     CLEAR_ALL_SUCCESS_MESSAGE: 'Removed %d/%d webp images.'
@@ -16,9 +18,11 @@ en:
     PATH_OPTION_ERROR: 'Path option not defined.'
 pl:
   PLUGIN_WEBP:
+    ORIGINAL_PATH_FIELD_LABEL: 'Ścieżka oryginalna'
     QUALITY_FIELD_LABEL: 'Jakość'
     CONVERSION_FIELD_LABEL: 'Konwertuj'
     CLEAR_ALL_FIELD_LABEL: 'Usuń wszystkie'
+    ORIGINAL_PATH_FIELD_HELPER: 'Zapisz obrazek webp w tym samym katalogu co oryginalny obrazek.'
     CONVERSION_ALL_SUCCESS_MESSAGE: 'Liczba skonwertowanych obrazków: %d/%d.'
     CONVERSION_SUCCESS_MESSAGE: 'Konwersja przebiegła prawidłowo, ścieżka do obrazka webp: %s.'
     CLEAR_ALL_SUCCESS_MESSAGE: 'Usunięto %d/%d obrazków webp.'
