@@ -1,3 +1,9 @@
+# v1.5.0
+##  02/21/2025
+
+1. [](#new)
+    * Added option to change where webp files are saved [#17](https://github.com/greenrivers/grav-plugin-webp/issues/17)
+
 # v1.4.6
 ##  02/03/2024
 
